@@ -30,6 +30,7 @@ export interface IDraggableGridProps<DataType extends IBaseItemType> {
   itemHeight?: number
   dragStartAnimation?: StyleProp<any>
   onItemPress?: (item: DataType) => void
+  onItemLongPress?: (item: DataType) => void
   onDragStart?: (item: DataType) => void
   onDragging?: (gestureState: PanResponderGestureState) => void
   onDragRelease?: (newSortedData: DataType[]) => void
@@ -251,6 +252,7 @@ export const DraggableGrid = function<DataType extends IBaseItemType>(
 
     setPanResponderCapture(true)
     setActiveItemIndex(itemIndex)
+    props.onItemLongPress && props.onItemLongPress(items[itemIndex].itemData)
   }
   function startDragStartAnimation() {
     if (!props.dragStartAnimation) {
